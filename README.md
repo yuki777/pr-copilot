@@ -1,6 +1,6 @@
 # pr-copilot
 
-GitHub PRを **Claude Code** と **Copilot CLI** の2者レビュー方式で自動レビューする [Claude Code](https://docs.anthropic.com/en/docs/claude-code) プラグイン。
+GitHub PRを **Claude Code** と **Copilot CLI** の2者レビュー方式で自動レビューする Claude Code プラグイン。
 
 ## 特徴
 
