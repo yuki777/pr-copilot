@@ -1,0 +1,22 @@
+{
+  "name": "pr-copilot",
+  "owner": {
+    "name": "yuki777"
+  },
+  "metadata": {
+    "description": "GitHub PRを Claude Code と Copilot CLI の2者レビュー方式で自動レビューするプラグイン",
+    "version": "1.0.0",
+    "repository": "https://github.com/yuki777/pr-copilot",
+    "license": "MIT",
+    "keywords": ["pr-review", "copilot", "code-review", "github", "automation"]
+  },
+  "plugins": [
+    {
+      "name": "pr-copilot",
+      "description": "GitHub PRを Claude Code と Copilot CLI の2者レビュー方式で自動レビュー",
+      "source": "./",
+      "strict": false,
+      "skills": []
+    }
+  ]
+}
