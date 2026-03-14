@@ -1,4 +1,6 @@
 ---
+user-invocable: true
+name: pr-copilot
 description: "GitHub PRを Claude Code と Copilot CLI の2者レビュー方式で自動レビューする"
 argument-hint: ""
 allowed-tools: ["Bash", "Read", "Write", "Glob", "Grep", "Agent"]
