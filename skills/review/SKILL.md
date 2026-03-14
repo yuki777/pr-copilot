@@ -21,7 +21,7 @@ cd ~/claude-loop-pr-copilot && claude
 起動後:
 
 ```
-/loop 10m /pr-copilot
+/loop 10m /pr-copilot:review
 ```
 
 ワーキングディレクトリを `~/claude-loop-pr-copilot/` にすることで、配下のファイルに直接アクセスできる。
