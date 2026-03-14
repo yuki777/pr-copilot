@@ -7,5 +7,6 @@
   },
   "repository": "https://github.com/yuki777/pr-copilot",
   "license": "MIT",
-  "keywords": ["pr-review", "copilot", "code-review", "github", "automation"]
+  "keywords": ["pr-review", "copilot", "code-review", "github", "automation"],
+  "skills": "./skills/"
 }
