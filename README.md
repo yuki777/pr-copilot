@@ -11,9 +11,9 @@ GitHub PRを **Claude Code** と **Copilot CLI** の2者レビュー方式で自
 
 ## 必要なもの
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-- [Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli)
-- [GitHub CLI (`gh`)](https://cli.github.com/)
+- Claude Code
+- Copilot CLI
+- GitHub CLI (`gh`)
 
 ## セットアップ
 
