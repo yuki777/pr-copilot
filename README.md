@@ -22,7 +22,6 @@ GitHub PRを **Claude Code** と **Copilot CLI** の2者レビュー方式で自
 ```
 /plugin marketplace add yuki777/pr-copilot
 /plugin install pr-copilot@yuki777/pr-copilot
-/reload-plugins
 ```
 
 ### アップデート
