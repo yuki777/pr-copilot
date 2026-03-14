@@ -48,7 +48,7 @@ cd ~/claude-loop-pr-copilot && claude
 10分間隔で自動レビューを開始:
 
 ```
-/loop 10m /pr-copilot
+/loop 10m /pr-copilot:review
 ```
 
 ## レビューフロー
