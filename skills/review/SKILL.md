@@ -67,7 +67,7 @@ gh api -H "Accept: application/vnd.github+json" \
 
 ### Step 2: 候補PRの選定
 
-取得した候補（`$org`, `$repository`, `$pr_number`, `$title`, `$pr_url`）を上から順に走査し、以下の条件で最初の1件を選定する:
+取得した候補（`$org`, `$repository`, `$pr_number`, `$title`, `$pr_url`）を上から順に**1件ずつ個別の Bash コマンドで**走査し、以下の条件で最初の1件を選定する。**複数候補を `for` ループでまとめて処理しないこと**（クォート文字列を含む `for item in "..." "..."` 構文が「Command contains quoted characters in flag names」の承認プロンプトを発生させるため）。
 
 1. 自分が実際にレビュー対象かチェック:
    - Step 1 で取得した `$MY_LOGIN` を使う
@@ -285,6 +285,8 @@ $pr_url
 **重要: バックグラウンドタスク完了後に `Write` ツールを使うと、`allowed-tools` の自動承認が効かず承認プロンプトが発生する。** ファイルの書き込み（status.json の更新、review.md の作成等）は `Write` ツールではなく `Bash` でヒアドキュメント (`cat > file <<'EOF'`) を使うこと。
 
 **重要: `gh api` や `gh pr view` の `--jq` フラグを使わないこと。** クォート文字を含むフラグ値が「Command contains quoted characters in flag names」の承認プロンプトを発生させ、自動処理が停止する。代わりに `| jq` にパイプすること（例: `gh api user | jq -r '.login'`）。
+
+**重要: 複数候補を `for` ループでまとめて処理しないこと。** `for item in "org repo 123" "org repo 456"; do ... done` のようなクォート文字列を含むループ構文は「Command contains quoted characters in flag names」の承認プロンプトを発生させる。候補は1件ずつ個別の Bash コマンドで処理すること。
 
 ## 注意事項
 
