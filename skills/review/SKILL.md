@@ -33,10 +33,17 @@ cd ~/claude-loop-pr-copilot && claude
 GitHub Search API でレビュー依頼されている Open PR を取得する。
 Notifications API と異なり、リポジトリの Watch 設定に依存しない。
 
+まず自分のログイン名を取得する:
+
 ```bash
-MY_LOGIN=$(gh api user --jq '.login')
+gh api user --jq '.login'
+```
+
+取得したログイン名を `$MY_LOGIN` として、Search API でレビュー依頼PRを検索する:
+
+```bash
 gh api -H "Accept: application/vnd.github+json" \
-  "/search/issues?q=is:pr+state:open+review-requested:${MY_LOGIN}&sort=updated&order=desc&per_page=100" \
+  "/search/issues?q=is:pr+state:open+review-requested:$MY_LOGIN&sort=updated&order=desc&per_page=100" \
   --jq '.items[] | {
     org: (.repository_url | split("/")[-2]),
     repository: (.repository_url | split("/")[-1]),
@@ -63,7 +70,7 @@ gh api -H "Accept: application/vnd.github+json" \
 取得した候補（`$org`, `$repository`, `$pr_number`, `$title`, `$pr_url`）を上から順に走査し、以下の条件で最初の1件を選定する:
 
 1. 自分が実際にレビュー対象かチェック:
-   - `gh api user | jq -r '.login'` で自分のログイン名を取得
+   - Step 1 で取得した `$MY_LOGIN` を使う
    - `gh api repos/$org/$repository/pulls/$pr_number/requested_reviewers` で requested reviewers を取得
    - `.users[].login` に自分のログイン名が含まれる → **レビュー対象**
    - `.teams[].slug` が存在する場合は、自分が所属する team slug 一覧と突き合わせる
