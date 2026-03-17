@@ -245,13 +245,15 @@ jq -n --arg org "$org" --arg repository "$repository" --arg pr_number "$pr_numbe
 
 Claude Code と Copilot CLI の両方で独立にレビューし、結果を統合する。
 
+**4a と 4b は並行実行する。** 各ツールは独立した clone ディレクトリを使うため競合しない。両方の Bash コマンドを `run_in_background: true` で同時に発行し、両方の完了を待ってから 4c に進む。
+
 #### 4a: Claude Code レビュー
 
 子プロセスの claude code でレビューを実行する。Bash ツールで以下のコマンドを一字一句変えずに実行する。
 
-- いつ使うか: Step 3 完了後に実行する
+- いつ使うか: Step 3 完了後に 4b と同時に実行する（`run_in_background: true`）
 - 判定条件: `claude-review.md` が生成され、終了コードが 0
-- 次アクション: 成功なら 4b へ、失敗または timeout なら Step 5 の failed 更新へ進む
+- 次アクション: 4b と合わせて両方完了したら 4c へ、失敗または timeout なら Step 5 の failed 更新へ進む
 - timeout: `600000`
 
 ```bash
@@ -273,9 +275,9 @@ env -u CLAUDECODE claude -p "/review $org/$repository $pr_number" \
 
 Copilot CLI を使い、同じPRをレビューさせる。Bash ツールで以下のコマンドを一字一句変えずに実行する。
 
-- いつ使うか: 4a 成功後に実行する
+- いつ使うか: Step 3 完了後に 4a と同時に実行する（`run_in_background: true`）
 - 判定条件: `copilot-review.md` が生成され、終了コードが 0
-- 次アクション: 成功なら 4c へ、失敗または timeout なら Step 5 の failed 更新へ進む
+- 次アクション: 4a と合わせて両方完了したら 4c へ、失敗または timeout なら Step 5 の failed 更新へ進む
 - timeout: `600000`
 
 ```bash
