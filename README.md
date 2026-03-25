@@ -42,7 +42,7 @@ GitHub PRを **Claude Code** と **Copilot CLI** の2者レビュー方式で自
 
 ```bash
 mkdir -p ~/claude-loop-pr-copilot
-cd ~/claude-loop-pr-copilot && claude
+cd ~/claude-loop-pr-copilot && claude --permission-mode auto
 ```
 
 10分間隔で自動レビューを開始:
