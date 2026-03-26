@@ -53,7 +53,7 @@ gh api user | jq -r '.login'
 
 ```bash
 gh api -H "Accept: application/vnd.github+json" \
-  "/search/issues?q=is:pr+state:open+review-requested:$MY_LOGIN&sort=updated&order=desc&per_page=100" \
+  "/search/issues?q=is:pr+state:open+draft:false+review-requested:$MY_LOGIN&sort=updated&order=desc&per_page=100" \
   | jq -r '.items[] | {
     org: (.repository_url | split("/")[-2]),
     repository: (.repository_url | split("/")[-1]),
@@ -67,6 +67,7 @@ gh api -H "Accept: application/vnd.github+json" \
 
 - `is:pr` - PR のみ（Issue を除外）
 - `state:open` - Open な PR のみ
+- `draft:false` - Draft PR を除外
 - `review-requested:$MY_LOGIN` - 自分がレビュー依頼されている PR（チームレビュー依頼も含む）
 - `sort=updated&order=desc` - 更新日時の降順（最新を優先。best match のデフォルトだと古い PR が漏れる）
 - `per_page=100` - 最大 100 件取得
